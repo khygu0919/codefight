@@ -8,29 +8,22 @@ This algorithm should check if the given grid of numbers represents a correct so
 '''
 def sudoku(grid):
     a=[]
-    for i in range(3):
+    for k in range(3):
+        a=[]
         for j in range(3):
-            a+=grid[3*j+i][3*j:3*j+3]
-    return a
-grid=[[1,3,4,2,5,6,9,8,7], 
- [4,6,8,5,7,9,3,2,1], 
- [7,9,2,8,1,3,6,5,4], 
- [9,2,3,1,4,5,8,7,6], 
- [3,5,7,4,6,8,2,1,9], 
- [6,8,1,7,9,2,5,4,3], 
- [5,7,6,9,8,1,4,3,2], 
- [2,4,5,6,3,7,1,9,8], 
- [8,1,9,3,2,4,7,6,5]]
-print sudoku(grid)
-'''
- [3*n][3*m]~[3*n][3*m+2] [3*n+1][3*m]~[3*n+1][3*m+2] [3*n+2][3*m]~[3*n+2][3*m+2]
- [0][0]~[0][2],[1][0]~[1][2],[2][0]~[2][2]
- [0][3]~[0][5],~,~
- [0][6]~[0][8],~,~
- [3][0]~[3][2],~,~
- ~
- ~
- [6][0]
- [7]
- [8]
- '''
+            a=grid[k*3][j*3:j*3+3]+grid[k*3+1][j*3:j*3+3]+grid[k*3+2][j*3:j*3+3]
+            for x in range(1,10):
+                if a.count(x)>1:
+                    return False
+    for m in range(9):
+        a=[]
+        for x in range(1,10):
+            if grid[m].count(x)>1:
+                return False
+        for n in range(9):
+            a.append(grid[n][m])
+        print a
+        for x in range(1,10):
+            if a.count(x)>1:
+                return False
+    return True
